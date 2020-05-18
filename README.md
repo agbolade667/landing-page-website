@@ -1,4 +1,4 @@
-# landing-page-website
+# Landing Page Website
 
 
 This codebase makes a static website interactive by reacting to user's action. 
