@@ -142,9 +142,18 @@ function checkIfSectionInView() {
 }
 
 
-// Set sections as active
+// Execute anonymous function on window.scroll 
+window.onscroll = function() {
+    myFunction()
+  };
 
+// Display the navigation bar
+var navbar = document.getElementById("header");
+console.log(navbar)
 
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+console.log(sticky)
 
 
 
