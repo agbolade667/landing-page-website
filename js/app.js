@@ -51,12 +51,13 @@ for (let k = 1; k < (containerCount + 1); k++) {
 
 /**
  */
- 
+
+ //Added Event Listener to Click
+
 list_target.addEventListener("click", function() {
     item_target.scrollIntoView ({
       behavior: 'smooth'}
     )
-//Added behavior smooth as per review. There is now a visible scroll
     button_to_add.innerHTML =
       "<button class='section-button' onclick='goToTop()'>Return to Top</button>";
   });
@@ -77,6 +78,28 @@ list_target.addEventListener("click", function() {
 
 
 // Scroll to anchor ID using scrollTO event
+
+
+//Function to control moving to the top of the page. 
+const scrollToTop = () => {
+  const scrolling = document.documentElement.scrollTop || document.body.scrollTop;
+  if (scrolling > 0) {
+    window.requestAnimationFrame(scrollToTop);
+    window.scrollTo(0, scrolling - scrolling / 50);
+  }
+};
+
+
+// On button click, goes to top of page 
+function goToTop() {
+scrollToTop();
+
+  for (let j = 1; j < containerCount + 1; j++) {
+    let button_to_delete = document.getElementById("section" + j + "-button");
+    button_to_delete.innerHTML = "";
+  }
+}
+
 
 
 /**
