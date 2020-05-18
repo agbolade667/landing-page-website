@@ -1,86 +1,43 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
-
-/**
- * Define Global Variables
- * 
-*/
-
-
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
+//Build the menu dynamically
 
 let unorderedList = document.getElementById("unordered-list");
 let containerCount = document.getElementsByClassName("landing__container")
   .length;
 
-for (let k = 1; k < (containerCount + 1); k++) {
-  let item = "#section" + k + "-title";
-  let item_value = document.querySelector(item);
-  let item_text = item_value.textContent;
-  let new_line = document.createElement("li");
-  let line_text = document.createTextNode(item_text);
-  let list_item = "sample-nav-" + k;
+for (i = 1; i < containerCount + 1; i++) {
+  let item = "#section" + i + "-title";
+  let itemValue = document.querySelector(item);
+  let itemText = itemValue.textContent;
+  let newLine = document.createElement("li");
+  let lineText = document.createTextNode(itemText);
+  let listItem = "sample-nav-" + i;
+  newLine.setAttribute("id", listItem);
+  newLine.setAttribute("class", "nav-list-item");
+  newLine.appendChild(lineText);
+  unorderedList.appendChild(newLine);
 
-  new_line.setAttribute("id", list_item);
-  new_line.setAttribute("class", "nav-list-item");
-  new_line.appendChild(line_text);
-  unorderedList.appendChild(new_line);
+  let itemTarget = document.getElementById("section" + i);
+  let listTarget = document.getElementById(listItem);
+  let buttonName = "section" + i + "-button";
+  let buttonToAdd = document.getElementById(buttonName);
 
-  let item_target = document.getElementById("section" + k);
-  let list_target = document.getElementById(list_item);
-  let button_name = "section" + k + "-button";
-  let button_to_add = document.getElementById(buttonName);
+  //Adds button when scrolls into view
 
-
-/**
- */
-
- //Added Event Listener to Click
-
-list_target.addEventListener("click", function() {
-    item_target.scrollIntoView ({
+  listTarget.addEventListener("click", function() {
+    itemTarget.scrollIntoView ({
       behavior: 'smooth'}
     )
-    button_to_add.innerHTML =
+//Added behavior smooth as per review. There is now a visible scroll
+    buttonToAdd.innerHTML =
       "<button class='section-button' onclick='goToTop()'>Return to Top</button>";
   });
 }
 
- /* 
- * End Helper Functions
- * 
- * 
- * 
- * Begin Main Functions
- * 
-*/
 
-// build the nav
-
-// Add class 'active' to section when near top of viewport
+//Changed from 'document.documentElement.scrollTop = 0' method to a visible scroll to top as per reviewer
 
 
-// Scroll to anchor ID using scrollTO event
-
-
-//Function to control moving to the top of the page. 
+//This is the helper function for a scroll (I set it a bit slow for visibility)
 const scrollToTop = () => {
   const scrolling = document.documentElement.scrollTop || document.body.scrollTop;
   if (scrolling > 0) {
@@ -94,24 +51,13 @@ const scrollToTop = () => {
 function goToTop() {
 scrollToTop();
 
-  for (let j = 1; j < containerCount + 1; j++) {
-    let button_to_delete = document.getElementById("section" + j + "-button");
-    button_to_delete.innerHTML = "";
+  for (i = 1; i < containerCount + 1; i++) {
+    let buttonToDelete = document.getElementById("section" + i + "-button");
+    buttonToDelete.innerHTML = "";
   }
 }
 
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click 
-
+//Checks if section is in view and adds active-class with moving background and color change
 function checkIfSectionInView() {
   let isInViewport = function(elem) {
     let bounding = elem.getBoundingClientRect();
@@ -124,16 +70,16 @@ function checkIfSectionInView() {
     );
   };
 
-  for (let d = 1; d < containerCount + 1; d++) {
-    let section_in_full_view = document.getElementById("section" + d);
+  for (i = 1; i < containerCount + 1; i++) {
+    let sectionInFullView = document.getElementById("section" + i);
 
     window.addEventListener(
       "scroll",
       function(event) {
         if (isInViewport(sectionInFullView)) {
-          section_in_full_view.classList.add("your-active-class");
+          sectionInFullView.classList.add("your-active-class");
         } else {
-          section_in_full_view.classList.remove("your-active-class");
+          sectionInFullView.classList.remove("your-active-class");
         }
       },
       false
@@ -141,20 +87,18 @@ function checkIfSectionInView() {
   }
 }
 
+//Add sticky header as per review (Used tutorial here: https://www.w3schools.com/howto/howto_js_navbar_sticky.asp)
 
-// Execute anonymous function on window.scroll 
-window.onscroll = function() {
-    myFunction()
-  };
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
 
-// Display the navigation bar
+// Get the navbar
 var navbar = document.getElementById("header");
-console.log(navbar);
+console.log(navbar)
 
 // Get the offset position of the navbar
 var sticky = header.offsetTop;
-console.log(sticky);
-
+console.log(sticky)
 
 // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function myFunction() {
