@@ -110,6 +110,41 @@ scrollToTop();
 
 // Build menu 
 
-// Scroll to section on link click
+// Scroll to section on link click 
+
+function checkIfSectionInView() {
+  let isInViewport = function(elem) {
+    let bounding = elem.getBoundingClientRect();
+    return (
+      bounding.top <= 50 &&
+      bounding.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      bounding.right <=
+        (window.innerWidth || document.documentElement.clientWidth)
+    );
+  };
+
+  for (let d = 1; d < containerCount + 1; d++) {
+    let section_in_full_view = document.getElementById("section" + d);
+
+    window.addEventListener(
+      "scroll",
+      function(event) {
+        if (isInViewport(sectionInFullView)) {
+          section_in_full_view.classList.add("your-active-class");
+        } else {
+          section_in_full_view.classList.remove("your-active-class");
+        }
+      },
+      false
+    );
+  }
+}
+
 
 // Set sections as active
+
+
+
+
+
