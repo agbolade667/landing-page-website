@@ -149,11 +149,19 @@ window.onscroll = function() {
 
 // Display the navigation bar
 var navbar = document.getElementById("header");
-console.log(navbar)
+console.log(navbar);
 
 // Get the offset position of the navbar
 var sticky = header.offsetTop;
-console.log(sticky)
+console.log(sticky);
 
 
-
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+checkIfSectionInView();
